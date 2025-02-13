@@ -88,11 +88,10 @@ class Archive:
             except ConnectionRefusedError:
                 time.sleep(5)
                 continue
-        try:
-            response = self.opener.open(req, **kwargs)
-        except urllib.error.HTTPError as e:
-            self.logprint("!", str(e))
-            response = e
+            except urllib.error.HTTPError as e:
+                self.logprint("!", str(e))
+                response = e
+                break
 
         data = response.read()
         #   links = {}
